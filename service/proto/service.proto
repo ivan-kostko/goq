@@ -1,0 +1,15 @@
+syntax = "proto3";
+package service;
+
+message Document {
+	string identifier = 1;
+	string content = 2;
+}
+
+service DocumentStoreService {
+  	rpc Store (Document);
+}
+
+service DocumentGetService {
+	rpc Get (string) returns Document;
+}
