@@ -1,16 +1,15 @@
 
-ARG GOLANG_IMAGE_TAG=1.10.4-alpine3.8
+ARG GOLANG_IMAGE_TAG=1.12.8-alpine3.10
 ARG RUNNER_ALPINE_IMAGE_TAG=3.8
 
 FROM golang:${GOLANG_IMAGE_TAG} as base
 
-ARG PROTOBUF_VERSION_ARG=3.3.5.2-r0
 ARG GO_PROJECT_ARG=github.com/ivan-kostko/goq/service
 
 ENV PROTOBUF_VERSION=${PROTOBUF_VERSION_ARG}
 ENV GO_PROJECT=${GO_PROJECT_ARG}
 
-RUN apk add git binutils protobuf	#=${PROTOBUF_VERSION}
+RUN apk add git binutils protobuf
 
 RUN go tool cgo -V && \
     protoc --version
