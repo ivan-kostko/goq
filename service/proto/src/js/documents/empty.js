@@ -7,7 +7,7 @@
  */
 // GENERATED CODE -- DO NOT EDIT!
 
-goog.provide('proto.service.DocumentStoreResponse');
+goog.provide('proto.service.Empty');
 
 goog.require('jspb.BinaryReader');
 goog.require('jspb.BinaryWriter');
@@ -24,12 +24,12 @@ goog.require('jspb.Message');
  * @extends {jspb.Message}
  * @constructor
  */
-proto.service.DocumentStoreResponse = function(opt_data) {
+proto.service.Empty = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.service.DocumentStoreResponse, jspb.Message);
+goog.inherits(proto.service.Empty, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.service.DocumentStoreResponse.displayName = 'proto.service.DocumentStoreResponse';
+  proto.service.Empty.displayName = 'proto.service.Empty';
 }
 
 
@@ -44,8 +44,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     for transitional soy proto support: http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.service.DocumentStoreResponse.prototype.toObject = function(opt_includeInstance) {
-  return proto.service.DocumentStoreResponse.toObject(opt_includeInstance, this);
+proto.service.Empty.prototype.toObject = function(opt_includeInstance) {
+  return proto.service.Empty.toObject(opt_includeInstance, this);
 };
 
 
@@ -54,11 +54,11 @@ proto.service.DocumentStoreResponse.prototype.toObject = function(opt_includeIns
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
  *     instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.service.DocumentStoreResponse} msg The msg instance to transform.
+ * @param {!proto.service.Empty} msg The msg instance to transform.
  * @return {!Object}
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.service.DocumentStoreResponse.toObject = function(includeInstance, msg) {
+proto.service.Empty.toObject = function(includeInstance, msg) {
   var f, obj = {
 
   };
@@ -74,23 +74,23 @@ proto.service.DocumentStoreResponse.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.service.DocumentStoreResponse}
+ * @return {!proto.service.Empty}
  */
-proto.service.DocumentStoreResponse.deserializeBinary = function(bytes) {
+proto.service.Empty.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.service.DocumentStoreResponse;
-  return proto.service.DocumentStoreResponse.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.service.Empty;
+  return proto.service.Empty.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.service.DocumentStoreResponse} msg The message object to deserialize into.
+ * @param {!proto.service.Empty} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.service.DocumentStoreResponse}
+ * @return {!proto.service.Empty}
  */
-proto.service.DocumentStoreResponse.deserializeBinaryFromReader = function(msg, reader) {
+proto.service.Empty.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -110,9 +110,9 @@ proto.service.DocumentStoreResponse.deserializeBinaryFromReader = function(msg, 
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.service.DocumentStoreResponse.prototype.serializeBinary = function() {
+proto.service.Empty.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.service.DocumentStoreResponse.serializeBinaryToWriter(this, writer);
+  proto.service.Empty.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -120,11 +120,11 @@ proto.service.DocumentStoreResponse.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.service.DocumentStoreResponse} message
+ * @param {!proto.service.Empty} message
  * @param {!jspb.BinaryWriter} writer
  * @suppress {unusedLocalVariables} f is only used for nested messages
  */
-proto.service.DocumentStoreResponse.serializeBinaryToWriter = function(message, writer) {
+proto.service.Empty.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
 };
 

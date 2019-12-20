@@ -3,5 +3,8 @@
 
  http:
    rules:
-   - selector: service.DocumentGet.Get
+   - selector: service.Documents.Get
      get: /v1/document/{identifier.value}
+   - selector: service.Documents.Store
+     put: /v1/document/{document.identifier.value}
+     body: document.content

@@ -2,8 +2,9 @@ package storage
 
 import (
 	"io"
-	"github.com/pkg/errors"
+
 	"github.com/ivan-kostko/goq/app"
+	"github.com/pkg/errors"
 )
 
 type DocumentStorer func(d *app.Document) error
@@ -11,7 +12,7 @@ type DocumentStorer func(d *app.Document) error
 type DocumentGetter func(identifier string) (*app.Document, error)
 
 type Storer interface {
-	Store(identifier string, []byte) error
+	Store(identifier string, content []byte) error
 }
 
 type Getter interface {
@@ -30,7 +31,7 @@ func NewDocumentGetter(log Logger, storage Getter) DocumentGetter {
 		log.Infof("Extracting document '%s'", identifier)
 
 		reader, err := storage.Get(identifier)
-		err = errors.Wrapf("Failed to extract document '%s'", identifier)
+		err = errors.Wrapf(err, "Failed to extract document '%s'", identifier)
 		if err != nil {
 			return nil, err
 		}
@@ -46,7 +47,7 @@ func NewDocumentStorer(log Logger, storage Storer) DocumentStorer {
 		log.Infof("Persisting document '%s'", d.GetId())
 
 		err := storage.Store(d.GetId(), d.Content())
-		err = errors.Wrapf("Failed to persist document '%s'", d.GetId())
+		err = errors.Wrapf(err, "Failed to persist document '%s'", d.GetId())
 		if err != nil {
 			return err
 		}
@@ -55,4 +56,3 @@ func NewDocumentStorer(log Logger, storage Storer) DocumentStorer {
 		return nil
 	}
 }
-

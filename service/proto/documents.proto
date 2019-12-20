@@ -1,13 +1,10 @@
 syntax = "proto3";
 package service;
 
+message Empty {}
+
 message Identifier {
 	string value = 1;
-}
-
-message Error {
-	int32 code = 1;
-	string message = 2;
 }
 
 message Document {
@@ -19,12 +16,6 @@ message DocumentStoreReuest {
 	Document document = 1;
 }
 
-message DocumentStoreResponse {}
-
-service DocumentStore {
-  	rpc Store (DocumentStoreReuest) returns (DocumentStoreResponse);
-}
-
 message DocumentGetReuest {
 	Identifier identifier =1;
 }
@@ -33,6 +24,7 @@ message DocumentGetResponse {
 	Document document =1;
 }
 
-service DocumentGet {
+service Documents {
+  	rpc Store (DocumentStoreReuest) returns (Empty);
 	rpc Get (DocumentGetReuest) returns (DocumentGetResponse);
 }
