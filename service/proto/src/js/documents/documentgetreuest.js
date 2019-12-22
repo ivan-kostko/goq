@@ -12,7 +12,6 @@ goog.provide('proto.service.DocumentGetReuest');
 goog.require('jspb.BinaryReader');
 goog.require('jspb.BinaryWriter');
 goog.require('jspb.Message');
-goog.require('proto.service.Identifier');
 
 
 /**
@@ -61,7 +60,7 @@ proto.service.DocumentGetReuest.prototype.toObject = function(opt_includeInstanc
  */
 proto.service.DocumentGetReuest.toObject = function(includeInstance, msg) {
   var f, obj = {
-    identifier: (f = msg.getIdentifier()) && proto.service.Identifier.toObject(includeInstance, f)
+    identifier: jspb.Message.getFieldWithDefault(msg, 1, "")
   };
 
   if (includeInstance) {
@@ -99,8 +98,7 @@ proto.service.DocumentGetReuest.deserializeBinaryFromReader = function(msg, read
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = new proto.service.Identifier;
-      reader.readMessage(value,proto.service.Identifier.deserializeBinaryFromReader);
+      var value = /** @type {string} */ (reader.readString());
       msg.setIdentifier(value);
       break;
     default:
@@ -133,43 +131,27 @@ proto.service.DocumentGetReuest.prototype.serializeBinary = function() {
 proto.service.DocumentGetReuest.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
   f = message.getIdentifier();
-  if (f != null) {
-    writer.writeMessage(
+  if (f.length > 0) {
+    writer.writeString(
       1,
-      f,
-      proto.service.Identifier.serializeBinaryToWriter
+      f
     );
   }
 };
 
 
 /**
- * optional Identifier identifier = 1;
- * @return {?proto.service.Identifier}
+ * optional string identifier = 1;
+ * @return {string}
  */
 proto.service.DocumentGetReuest.prototype.getIdentifier = function() {
-  return /** @type{?proto.service.Identifier} */ (
-    jspb.Message.getWrapperField(this, proto.service.Identifier, 1));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
 
-/** @param {?proto.service.Identifier|undefined} value */
+/** @param {string} value */
 proto.service.DocumentGetReuest.prototype.setIdentifier = function(value) {
-  jspb.Message.setWrapperField(this, 1, value);
-};
-
-
-proto.service.DocumentGetReuest.prototype.clearIdentifier = function() {
-  this.setIdentifier(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {!boolean}
- */
-proto.service.DocumentGetReuest.prototype.hasIdentifier = function() {
-  return jspb.Message.getField(this, 1) != null;
+  jspb.Message.setProto3StringField(this, 1, value);
 };
 
 

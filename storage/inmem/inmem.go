@@ -52,3 +52,11 @@ func NewGetter(log Logger, storage interface {
 		return nil, errors.New("Failed to cast content")
 	}
 }
+
+func (f Storer) Store(identifier string, content []byte) error {
+	return f(identifier, content)
+}
+
+func (f Getter) Get(identifier string) (io.Reader, error) {
+	return f(identifier)
+}

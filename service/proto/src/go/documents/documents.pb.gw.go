@@ -32,7 +32,7 @@ var _ = utilities.NewDoubleArray
 var _ = descriptor.ForMessage
 
 var (
-	filter_Documents_Store_0 = &utilities.DoubleArray{Encoding: map[string]int{"document": 0, "content": 1, "identifier": 2, "value": 3}, Base: []int{1, 1, 1, 1, 2, 0, 0}, Check: []int{0, 1, 2, 2, 4, 3, 5}}
+	filter_Documents_Store_0 = &utilities.DoubleArray{Encoding: map[string]int{"document": 0, "content": 1, "identifier": 2}, Base: []int{1, 1, 1, 2, 0, 0}, Check: []int{0, 1, 2, 2, 3, 4}}
 )
 
 func request_Documents_Store_0(ctx context.Context, marshaler runtime.Marshaler, client DocumentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -54,15 +54,15 @@ func request_Documents_Store_0(ctx context.Context, marshaler runtime.Marshaler,
 		_   = err
 	)
 
-	val, ok = pathParams["document.identifier.value"]
+	val, ok = pathParams["document.identifier"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "document.identifier.value")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "document.identifier")
 	}
 
-	err = runtime.PopulateFieldFromPath(&protoReq, "document.identifier.value", val)
+	err = runtime.PopulateFieldFromPath(&protoReq, "document.identifier", val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "document.identifier.value", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "document.identifier", err)
 	}
 
 	if err := req.ParseForm(); err != nil {
@@ -96,15 +96,15 @@ func local_request_Documents_Store_0(ctx context.Context, marshaler runtime.Mars
 		_   = err
 	)
 
-	val, ok = pathParams["document.identifier.value"]
+	val, ok = pathParams["document.identifier"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "document.identifier.value")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "document.identifier")
 	}
 
-	err = runtime.PopulateFieldFromPath(&protoReq, "document.identifier.value", val)
+	err = runtime.PopulateFieldFromPath(&protoReq, "document.identifier", val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "document.identifier.value", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "document.identifier", err)
 	}
 
 	if err := runtime.PopulateQueryParameters(&protoReq, req.URL.Query(), filter_Documents_Store_0); err != nil {
@@ -115,10 +115,6 @@ func local_request_Documents_Store_0(ctx context.Context, marshaler runtime.Mars
 	return msg, metadata, err
 
 }
-
-var (
-	filter_Documents_Get_0 = &utilities.DoubleArray{Encoding: map[string]int{"identifier": 0, "value": 1}, Base: []int{1, 1, 1, 0}, Check: []int{0, 1, 2, 3}}
-)
 
 func request_Documents_Get_0(ctx context.Context, marshaler runtime.Marshaler, client DocumentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq DocumentGetReuest
@@ -131,22 +127,15 @@ func request_Documents_Get_0(ctx context.Context, marshaler runtime.Marshaler, c
 		_   = err
 	)
 
-	val, ok = pathParams["identifier.value"]
+	val, ok = pathParams["identifier"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "identifier.value")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "identifier")
 	}
 
-	err = runtime.PopulateFieldFromPath(&protoReq, "identifier.value", val)
+	protoReq.Identifier, err = runtime.String(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "identifier.value", err)
-	}
-
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Documents_Get_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "identifier", err)
 	}
 
 	msg, err := client.Get(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -165,19 +154,15 @@ func local_request_Documents_Get_0(ctx context.Context, marshaler runtime.Marsha
 		_   = err
 	)
 
-	val, ok = pathParams["identifier.value"]
+	val, ok = pathParams["identifier"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "identifier.value")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "identifier")
 	}
 
-	err = runtime.PopulateFieldFromPath(&protoReq, "identifier.value", val)
+	protoReq.Identifier, err = runtime.String(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "identifier.value", err)
-	}
-
-	if err := runtime.PopulateQueryParameters(&protoReq, req.URL.Query(), filter_Documents_Get_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "identifier", err)
 	}
 
 	msg, err := server.Get(ctx, &protoReq)
@@ -315,9 +300,9 @@ func RegisterDocumentsHandlerClient(ctx context.Context, mux *runtime.ServeMux, 
 }
 
 var (
-	pattern_Documents_Store_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "document", "document.identifier.value"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Documents_Store_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "document", "document.identifier"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Documents_Get_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "document", "identifier.value"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Documents_Get_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "document", "identifier"}, "", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (

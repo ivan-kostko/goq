@@ -3,12 +3,8 @@ package service;
 
 message Empty {}
 
-message Identifier {
-	string value = 1;
-}
-
 message Document {
-	Identifier identifier = 1;
+	string identifier = 1;
 	string content = 2;
 }
 
@@ -17,7 +13,7 @@ message DocumentStoreReuest {
 }
 
 message DocumentGetReuest {
-	Identifier identifier =1;
+	string identifier =1;
 }
 
 message DocumentGetResponse {
