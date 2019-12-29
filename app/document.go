@@ -2,6 +2,7 @@ package app
 
 import (
 	"io"
+	"io/ioutil"
 
 	"github.com/google/uuid"
 )
@@ -20,7 +21,8 @@ func NewDocument(id string, r io.Reader) *Document {
 		reader: r,
 	}
 
-	r.Read(doc.content)
+	// TODO: find a better idea
+	doc.content, _ = ioutil.ReadAll(r)
 
 	if doc.id == "" {
 		doc.id = getNewId()

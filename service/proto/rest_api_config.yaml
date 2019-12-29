@@ -6,5 +6,5 @@
    - selector: service.Documents.Get
      get: /v1/document/{identifier}
    - selector: service.Documents.Store
-     put: /v1/document/{document.identifier}
-     body: document.content
+     put: /v1/document/{identifier}
+     body: "content"

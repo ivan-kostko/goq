@@ -441,14 +441,9 @@ public final class DocumentsOuterClass {
         getIdentifierBytes();
 
     /**
-     * <code>string content = 2;</code>
+     * <code>bytes content = 2;</code>
      */
-    java.lang.String getContent();
-    /**
-     * <code>string content = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getContentBytes();
+    com.google.protobuf.ByteString getContent();
   }
   /**
    * Protobuf type {@code service.Document}
@@ -464,7 +459,7 @@ public final class DocumentsOuterClass {
     }
     private Document() {
       identifier_ = "";
-      content_ = "";
+      content_ = com.google.protobuf.ByteString.EMPTY;
     }
 
     @java.lang.Override
@@ -498,9 +493,8 @@ public final class DocumentsOuterClass {
               break;
             }
             case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
 
-              content_ = s;
+              content_ = input.readBytes();
               break;
             }
             default: {
@@ -570,37 +564,12 @@ public final class DocumentsOuterClass {
     }
 
     public static final int CONTENT_FIELD_NUMBER = 2;
-    private volatile java.lang.Object content_;
+    private com.google.protobuf.ByteString content_;
     /**
-     * <code>string content = 2;</code>
+     * <code>bytes content = 2;</code>
      */
-    public java.lang.String getContent() {
-      java.lang.Object ref = content_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        content_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string content = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getContentBytes() {
-      java.lang.Object ref = content_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        content_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public com.google.protobuf.ByteString getContent() {
+      return content_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -620,8 +589,8 @@ public final class DocumentsOuterClass {
       if (!getIdentifierBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, identifier_);
       }
-      if (!getContentBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, content_);
+      if (!content_.isEmpty()) {
+        output.writeBytes(2, content_);
       }
       unknownFields.writeTo(output);
     }
@@ -635,8 +604,9 @@ public final class DocumentsOuterClass {
       if (!getIdentifierBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, identifier_);
       }
-      if (!getContentBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, content_);
+      if (!content_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, content_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -808,7 +778,7 @@ public final class DocumentsOuterClass {
         super.clear();
         identifier_ = "";
 
-        content_ = "";
+        content_ = com.google.protobuf.ByteString.EMPTY;
 
         return this;
       }
@@ -890,9 +860,8 @@ public final class DocumentsOuterClass {
           identifier_ = other.identifier_;
           onChanged();
         }
-        if (!other.getContent().isEmpty()) {
-          content_ = other.content_;
-          onChanged();
+        if (other.getContent() != com.google.protobuf.ByteString.EMPTY) {
+          setContent(other.getContent());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -992,43 +961,17 @@ public final class DocumentsOuterClass {
         return this;
       }
 
-      private java.lang.Object content_ = "";
+      private com.google.protobuf.ByteString content_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>string content = 2;</code>
+       * <code>bytes content = 2;</code>
        */
-      public java.lang.String getContent() {
-        java.lang.Object ref = content_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          content_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public com.google.protobuf.ByteString getContent() {
+        return content_;
       }
       /**
-       * <code>string content = 2;</code>
+       * <code>bytes content = 2;</code>
        */
-      public com.google.protobuf.ByteString
-          getContentBytes() {
-        java.lang.Object ref = content_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          content_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string content = 2;</code>
-       */
-      public Builder setContent(
-          java.lang.String value) {
+      public Builder setContent(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1038,25 +981,11 @@ public final class DocumentsOuterClass {
         return this;
       }
       /**
-       * <code>string content = 2;</code>
+       * <code>bytes content = 2;</code>
        */
       public Builder clearContent() {
         
         content_ = getDefaultInstance().getContent();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string content = 2;</code>
-       */
-      public Builder setContentBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        content_ = value;
         onChanged();
         return this;
       }
@@ -1108,613 +1037,6 @@ public final class DocumentsOuterClass {
 
     @java.lang.Override
     public service.DocumentsOuterClass.Document getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface DocumentStoreReuestOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:service.DocumentStoreReuest)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>.service.Document document = 1;</code>
-     */
-    boolean hasDocument();
-    /**
-     * <code>.service.Document document = 1;</code>
-     */
-    service.DocumentsOuterClass.Document getDocument();
-    /**
-     * <code>.service.Document document = 1;</code>
-     */
-    service.DocumentsOuterClass.DocumentOrBuilder getDocumentOrBuilder();
-  }
-  /**
-   * Protobuf type {@code service.DocumentStoreReuest}
-   */
-  public  static final class DocumentStoreReuest extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:service.DocumentStoreReuest)
-      DocumentStoreReuestOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use DocumentStoreReuest.newBuilder() to construct.
-    private DocumentStoreReuest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private DocumentStoreReuest() {
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private DocumentStoreReuest(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              service.DocumentsOuterClass.Document.Builder subBuilder = null;
-              if (document_ != null) {
-                subBuilder = document_.toBuilder();
-              }
-              document_ = input.readMessage(service.DocumentsOuterClass.Document.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(document_);
-                document_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return service.DocumentsOuterClass.internal_static_service_DocumentStoreReuest_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return service.DocumentsOuterClass.internal_static_service_DocumentStoreReuest_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              service.DocumentsOuterClass.DocumentStoreReuest.class, service.DocumentsOuterClass.DocumentStoreReuest.Builder.class);
-    }
-
-    public static final int DOCUMENT_FIELD_NUMBER = 1;
-    private service.DocumentsOuterClass.Document document_;
-    /**
-     * <code>.service.Document document = 1;</code>
-     */
-    public boolean hasDocument() {
-      return document_ != null;
-    }
-    /**
-     * <code>.service.Document document = 1;</code>
-     */
-    public service.DocumentsOuterClass.Document getDocument() {
-      return document_ == null ? service.DocumentsOuterClass.Document.getDefaultInstance() : document_;
-    }
-    /**
-     * <code>.service.Document document = 1;</code>
-     */
-    public service.DocumentsOuterClass.DocumentOrBuilder getDocumentOrBuilder() {
-      return getDocument();
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (document_ != null) {
-        output.writeMessage(1, getDocument());
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (document_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getDocument());
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof service.DocumentsOuterClass.DocumentStoreReuest)) {
-        return super.equals(obj);
-      }
-      service.DocumentsOuterClass.DocumentStoreReuest other = (service.DocumentsOuterClass.DocumentStoreReuest) obj;
-
-      boolean result = true;
-      result = result && (hasDocument() == other.hasDocument());
-      if (hasDocument()) {
-        result = result && getDocument()
-            .equals(other.getDocument());
-      }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasDocument()) {
-        hash = (37 * hash) + DOCUMENT_FIELD_NUMBER;
-        hash = (53 * hash) + getDocument().hashCode();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static service.DocumentsOuterClass.DocumentStoreReuest parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static service.DocumentsOuterClass.DocumentStoreReuest parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static service.DocumentsOuterClass.DocumentStoreReuest parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static service.DocumentsOuterClass.DocumentStoreReuest parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static service.DocumentsOuterClass.DocumentStoreReuest parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static service.DocumentsOuterClass.DocumentStoreReuest parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static service.DocumentsOuterClass.DocumentStoreReuest parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static service.DocumentsOuterClass.DocumentStoreReuest parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static service.DocumentsOuterClass.DocumentStoreReuest parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static service.DocumentsOuterClass.DocumentStoreReuest parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static service.DocumentsOuterClass.DocumentStoreReuest parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static service.DocumentsOuterClass.DocumentStoreReuest parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(service.DocumentsOuterClass.DocumentStoreReuest prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code service.DocumentStoreReuest}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:service.DocumentStoreReuest)
-        service.DocumentsOuterClass.DocumentStoreReuestOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return service.DocumentsOuterClass.internal_static_service_DocumentStoreReuest_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return service.DocumentsOuterClass.internal_static_service_DocumentStoreReuest_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                service.DocumentsOuterClass.DocumentStoreReuest.class, service.DocumentsOuterClass.DocumentStoreReuest.Builder.class);
-      }
-
-      // Construct using service.DocumentsOuterClass.DocumentStoreReuest.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        if (documentBuilder_ == null) {
-          document_ = null;
-        } else {
-          document_ = null;
-          documentBuilder_ = null;
-        }
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return service.DocumentsOuterClass.internal_static_service_DocumentStoreReuest_descriptor;
-      }
-
-      @java.lang.Override
-      public service.DocumentsOuterClass.DocumentStoreReuest getDefaultInstanceForType() {
-        return service.DocumentsOuterClass.DocumentStoreReuest.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public service.DocumentsOuterClass.DocumentStoreReuest build() {
-        service.DocumentsOuterClass.DocumentStoreReuest result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public service.DocumentsOuterClass.DocumentStoreReuest buildPartial() {
-        service.DocumentsOuterClass.DocumentStoreReuest result = new service.DocumentsOuterClass.DocumentStoreReuest(this);
-        if (documentBuilder_ == null) {
-          result.document_ = document_;
-        } else {
-          result.document_ = documentBuilder_.build();
-        }
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof service.DocumentsOuterClass.DocumentStoreReuest) {
-          return mergeFrom((service.DocumentsOuterClass.DocumentStoreReuest)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(service.DocumentsOuterClass.DocumentStoreReuest other) {
-        if (other == service.DocumentsOuterClass.DocumentStoreReuest.getDefaultInstance()) return this;
-        if (other.hasDocument()) {
-          mergeDocument(other.getDocument());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        service.DocumentsOuterClass.DocumentStoreReuest parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (service.DocumentsOuterClass.DocumentStoreReuest) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private service.DocumentsOuterClass.Document document_ = null;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          service.DocumentsOuterClass.Document, service.DocumentsOuterClass.Document.Builder, service.DocumentsOuterClass.DocumentOrBuilder> documentBuilder_;
-      /**
-       * <code>.service.Document document = 1;</code>
-       */
-      public boolean hasDocument() {
-        return documentBuilder_ != null || document_ != null;
-      }
-      /**
-       * <code>.service.Document document = 1;</code>
-       */
-      public service.DocumentsOuterClass.Document getDocument() {
-        if (documentBuilder_ == null) {
-          return document_ == null ? service.DocumentsOuterClass.Document.getDefaultInstance() : document_;
-        } else {
-          return documentBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.service.Document document = 1;</code>
-       */
-      public Builder setDocument(service.DocumentsOuterClass.Document value) {
-        if (documentBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          document_ = value;
-          onChanged();
-        } else {
-          documentBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.service.Document document = 1;</code>
-       */
-      public Builder setDocument(
-          service.DocumentsOuterClass.Document.Builder builderForValue) {
-        if (documentBuilder_ == null) {
-          document_ = builderForValue.build();
-          onChanged();
-        } else {
-          documentBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.service.Document document = 1;</code>
-       */
-      public Builder mergeDocument(service.DocumentsOuterClass.Document value) {
-        if (documentBuilder_ == null) {
-          if (document_ != null) {
-            document_ =
-              service.DocumentsOuterClass.Document.newBuilder(document_).mergeFrom(value).buildPartial();
-          } else {
-            document_ = value;
-          }
-          onChanged();
-        } else {
-          documentBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.service.Document document = 1;</code>
-       */
-      public Builder clearDocument() {
-        if (documentBuilder_ == null) {
-          document_ = null;
-          onChanged();
-        } else {
-          document_ = null;
-          documentBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.service.Document document = 1;</code>
-       */
-      public service.DocumentsOuterClass.Document.Builder getDocumentBuilder() {
-        
-        onChanged();
-        return getDocumentFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.service.Document document = 1;</code>
-       */
-      public service.DocumentsOuterClass.DocumentOrBuilder getDocumentOrBuilder() {
-        if (documentBuilder_ != null) {
-          return documentBuilder_.getMessageOrBuilder();
-        } else {
-          return document_ == null ?
-              service.DocumentsOuterClass.Document.getDefaultInstance() : document_;
-        }
-      }
-      /**
-       * <code>.service.Document document = 1;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          service.DocumentsOuterClass.Document, service.DocumentsOuterClass.Document.Builder, service.DocumentsOuterClass.DocumentOrBuilder> 
-          getDocumentFieldBuilder() {
-        if (documentBuilder_ == null) {
-          documentBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              service.DocumentsOuterClass.Document, service.DocumentsOuterClass.Document.Builder, service.DocumentsOuterClass.DocumentOrBuilder>(
-                  getDocument(),
-                  getParentForChildren(),
-                  isClean());
-          document_ = null;
-        }
-        return documentBuilder_;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:service.DocumentStoreReuest)
-    }
-
-    // @@protoc_insertion_point(class_scope:service.DocumentStoreReuest)
-    private static final service.DocumentsOuterClass.DocumentStoreReuest DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new service.DocumentsOuterClass.DocumentStoreReuest();
-    }
-
-    public static service.DocumentsOuterClass.DocumentStoreReuest getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<DocumentStoreReuest>
-        PARSER = new com.google.protobuf.AbstractParser<DocumentStoreReuest>() {
-      @java.lang.Override
-      public DocumentStoreReuest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new DocumentStoreReuest(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<DocumentStoreReuest> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<DocumentStoreReuest> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public service.DocumentsOuterClass.DocumentStoreReuest getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -2270,613 +1592,6 @@ public final class DocumentsOuterClass {
 
   }
 
-  public interface DocumentGetResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:service.DocumentGetResponse)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>.service.Document document = 1;</code>
-     */
-    boolean hasDocument();
-    /**
-     * <code>.service.Document document = 1;</code>
-     */
-    service.DocumentsOuterClass.Document getDocument();
-    /**
-     * <code>.service.Document document = 1;</code>
-     */
-    service.DocumentsOuterClass.DocumentOrBuilder getDocumentOrBuilder();
-  }
-  /**
-   * Protobuf type {@code service.DocumentGetResponse}
-   */
-  public  static final class DocumentGetResponse extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:service.DocumentGetResponse)
-      DocumentGetResponseOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use DocumentGetResponse.newBuilder() to construct.
-    private DocumentGetResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private DocumentGetResponse() {
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private DocumentGetResponse(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              service.DocumentsOuterClass.Document.Builder subBuilder = null;
-              if (document_ != null) {
-                subBuilder = document_.toBuilder();
-              }
-              document_ = input.readMessage(service.DocumentsOuterClass.Document.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(document_);
-                document_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return service.DocumentsOuterClass.internal_static_service_DocumentGetResponse_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return service.DocumentsOuterClass.internal_static_service_DocumentGetResponse_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              service.DocumentsOuterClass.DocumentGetResponse.class, service.DocumentsOuterClass.DocumentGetResponse.Builder.class);
-    }
-
-    public static final int DOCUMENT_FIELD_NUMBER = 1;
-    private service.DocumentsOuterClass.Document document_;
-    /**
-     * <code>.service.Document document = 1;</code>
-     */
-    public boolean hasDocument() {
-      return document_ != null;
-    }
-    /**
-     * <code>.service.Document document = 1;</code>
-     */
-    public service.DocumentsOuterClass.Document getDocument() {
-      return document_ == null ? service.DocumentsOuterClass.Document.getDefaultInstance() : document_;
-    }
-    /**
-     * <code>.service.Document document = 1;</code>
-     */
-    public service.DocumentsOuterClass.DocumentOrBuilder getDocumentOrBuilder() {
-      return getDocument();
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (document_ != null) {
-        output.writeMessage(1, getDocument());
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (document_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getDocument());
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof service.DocumentsOuterClass.DocumentGetResponse)) {
-        return super.equals(obj);
-      }
-      service.DocumentsOuterClass.DocumentGetResponse other = (service.DocumentsOuterClass.DocumentGetResponse) obj;
-
-      boolean result = true;
-      result = result && (hasDocument() == other.hasDocument());
-      if (hasDocument()) {
-        result = result && getDocument()
-            .equals(other.getDocument());
-      }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasDocument()) {
-        hash = (37 * hash) + DOCUMENT_FIELD_NUMBER;
-        hash = (53 * hash) + getDocument().hashCode();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static service.DocumentsOuterClass.DocumentGetResponse parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static service.DocumentsOuterClass.DocumentGetResponse parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static service.DocumentsOuterClass.DocumentGetResponse parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static service.DocumentsOuterClass.DocumentGetResponse parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static service.DocumentsOuterClass.DocumentGetResponse parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static service.DocumentsOuterClass.DocumentGetResponse parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static service.DocumentsOuterClass.DocumentGetResponse parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static service.DocumentsOuterClass.DocumentGetResponse parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static service.DocumentsOuterClass.DocumentGetResponse parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static service.DocumentsOuterClass.DocumentGetResponse parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static service.DocumentsOuterClass.DocumentGetResponse parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static service.DocumentsOuterClass.DocumentGetResponse parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(service.DocumentsOuterClass.DocumentGetResponse prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code service.DocumentGetResponse}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:service.DocumentGetResponse)
-        service.DocumentsOuterClass.DocumentGetResponseOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return service.DocumentsOuterClass.internal_static_service_DocumentGetResponse_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return service.DocumentsOuterClass.internal_static_service_DocumentGetResponse_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                service.DocumentsOuterClass.DocumentGetResponse.class, service.DocumentsOuterClass.DocumentGetResponse.Builder.class);
-      }
-
-      // Construct using service.DocumentsOuterClass.DocumentGetResponse.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        if (documentBuilder_ == null) {
-          document_ = null;
-        } else {
-          document_ = null;
-          documentBuilder_ = null;
-        }
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return service.DocumentsOuterClass.internal_static_service_DocumentGetResponse_descriptor;
-      }
-
-      @java.lang.Override
-      public service.DocumentsOuterClass.DocumentGetResponse getDefaultInstanceForType() {
-        return service.DocumentsOuterClass.DocumentGetResponse.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public service.DocumentsOuterClass.DocumentGetResponse build() {
-        service.DocumentsOuterClass.DocumentGetResponse result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public service.DocumentsOuterClass.DocumentGetResponse buildPartial() {
-        service.DocumentsOuterClass.DocumentGetResponse result = new service.DocumentsOuterClass.DocumentGetResponse(this);
-        if (documentBuilder_ == null) {
-          result.document_ = document_;
-        } else {
-          result.document_ = documentBuilder_.build();
-        }
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof service.DocumentsOuterClass.DocumentGetResponse) {
-          return mergeFrom((service.DocumentsOuterClass.DocumentGetResponse)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(service.DocumentsOuterClass.DocumentGetResponse other) {
-        if (other == service.DocumentsOuterClass.DocumentGetResponse.getDefaultInstance()) return this;
-        if (other.hasDocument()) {
-          mergeDocument(other.getDocument());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        service.DocumentsOuterClass.DocumentGetResponse parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (service.DocumentsOuterClass.DocumentGetResponse) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private service.DocumentsOuterClass.Document document_ = null;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          service.DocumentsOuterClass.Document, service.DocumentsOuterClass.Document.Builder, service.DocumentsOuterClass.DocumentOrBuilder> documentBuilder_;
-      /**
-       * <code>.service.Document document = 1;</code>
-       */
-      public boolean hasDocument() {
-        return documentBuilder_ != null || document_ != null;
-      }
-      /**
-       * <code>.service.Document document = 1;</code>
-       */
-      public service.DocumentsOuterClass.Document getDocument() {
-        if (documentBuilder_ == null) {
-          return document_ == null ? service.DocumentsOuterClass.Document.getDefaultInstance() : document_;
-        } else {
-          return documentBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>.service.Document document = 1;</code>
-       */
-      public Builder setDocument(service.DocumentsOuterClass.Document value) {
-        if (documentBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          document_ = value;
-          onChanged();
-        } else {
-          documentBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.service.Document document = 1;</code>
-       */
-      public Builder setDocument(
-          service.DocumentsOuterClass.Document.Builder builderForValue) {
-        if (documentBuilder_ == null) {
-          document_ = builderForValue.build();
-          onChanged();
-        } else {
-          documentBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>.service.Document document = 1;</code>
-       */
-      public Builder mergeDocument(service.DocumentsOuterClass.Document value) {
-        if (documentBuilder_ == null) {
-          if (document_ != null) {
-            document_ =
-              service.DocumentsOuterClass.Document.newBuilder(document_).mergeFrom(value).buildPartial();
-          } else {
-            document_ = value;
-          }
-          onChanged();
-        } else {
-          documentBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>.service.Document document = 1;</code>
-       */
-      public Builder clearDocument() {
-        if (documentBuilder_ == null) {
-          document_ = null;
-          onChanged();
-        } else {
-          document_ = null;
-          documentBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>.service.Document document = 1;</code>
-       */
-      public service.DocumentsOuterClass.Document.Builder getDocumentBuilder() {
-        
-        onChanged();
-        return getDocumentFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>.service.Document document = 1;</code>
-       */
-      public service.DocumentsOuterClass.DocumentOrBuilder getDocumentOrBuilder() {
-        if (documentBuilder_ != null) {
-          return documentBuilder_.getMessageOrBuilder();
-        } else {
-          return document_ == null ?
-              service.DocumentsOuterClass.Document.getDefaultInstance() : document_;
-        }
-      }
-      /**
-       * <code>.service.Document document = 1;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          service.DocumentsOuterClass.Document, service.DocumentsOuterClass.Document.Builder, service.DocumentsOuterClass.DocumentOrBuilder> 
-          getDocumentFieldBuilder() {
-        if (documentBuilder_ == null) {
-          documentBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              service.DocumentsOuterClass.Document, service.DocumentsOuterClass.Document.Builder, service.DocumentsOuterClass.DocumentOrBuilder>(
-                  getDocument(),
-                  getParentForChildren(),
-                  isClean());
-          document_ = null;
-        }
-        return documentBuilder_;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:service.DocumentGetResponse)
-    }
-
-    // @@protoc_insertion_point(class_scope:service.DocumentGetResponse)
-    private static final service.DocumentsOuterClass.DocumentGetResponse DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new service.DocumentsOuterClass.DocumentGetResponse();
-    }
-
-    public static service.DocumentsOuterClass.DocumentGetResponse getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<DocumentGetResponse>
-        PARSER = new com.google.protobuf.AbstractParser<DocumentGetResponse>() {
-      @java.lang.Override
-      public DocumentGetResponse parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new DocumentGetResponse(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<DocumentGetResponse> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<DocumentGetResponse> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public service.DocumentsOuterClass.DocumentGetResponse getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_service_Empty_descriptor;
   private static final 
@@ -2888,20 +1603,10 @@ public final class DocumentsOuterClass {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_service_Document_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_service_DocumentStoreReuest_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_service_DocumentStoreReuest_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_service_DocumentGetReuest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_service_DocumentGetReuest_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_service_DocumentGetResponse_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_service_DocumentGetResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2913,14 +1618,11 @@ public final class DocumentsOuterClass {
     java.lang.String[] descriptorData = {
       "\n\017documents.proto\022\007service\"\007\n\005Empty\"/\n\010D" +
       "ocument\022\022\n\nidentifier\030\001 \001(\t\022\017\n\007content\030\002" +
-      " \001(\t\":\n\023DocumentStoreReuest\022#\n\010document\030" +
-      "\001 \001(\0132\021.service.Document\"\'\n\021DocumentGetR" +
-      "euest\022\022\n\nidentifier\030\001 \001(\t\":\n\023DocumentGet" +
-      "Response\022#\n\010document\030\001 \001(\0132\021.service.Doc" +
-      "ument2\203\001\n\tDocuments\0225\n\005Store\022\034.service.D" +
-      "ocumentStoreReuest\032\016.service.Empty\022?\n\003Ge" +
-      "t\022\032.service.DocumentGetReuest\032\034.service." +
-      "DocumentGetResponseb\006proto3"
+      " \001(\014\"\'\n\021DocumentGetReuest\022\022\n\nidentifier\030" +
+      "\001 \001(\t2m\n\tDocuments\022*\n\005Store\022\021.service.Do" +
+      "cument\032\016.service.Empty\0224\n\003Get\022\032.service." +
+      "DocumentGetReuest\032\021.service.Documentb\006pr" +
+      "oto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2946,24 +1648,12 @@ public final class DocumentsOuterClass {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_service_Document_descriptor,
         new java.lang.String[] { "Identifier", "Content", });
-    internal_static_service_DocumentStoreReuest_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_service_DocumentStoreReuest_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_service_DocumentStoreReuest_descriptor,
-        new java.lang.String[] { "Document", });
     internal_static_service_DocumentGetReuest_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(2);
     internal_static_service_DocumentGetReuest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_service_DocumentGetReuest_descriptor,
         new java.lang.String[] { "Identifier", });
-    internal_static_service_DocumentGetResponse_descriptor =
-      getDescriptor().getMessageTypes().get(4);
-    internal_static_service_DocumentGetResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_service_DocumentGetResponse_descriptor,
-        new java.lang.String[] { "Document", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

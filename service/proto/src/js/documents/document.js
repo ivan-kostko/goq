@@ -61,7 +61,7 @@ proto.service.Document.prototype.toObject = function(opt_includeInstance) {
 proto.service.Document.toObject = function(includeInstance, msg) {
   var f, obj = {
     identifier: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    content: jspb.Message.getFieldWithDefault(msg, 2, "")
+    content: msg.getContent_asB64()
   };
 
   if (includeInstance) {
@@ -103,7 +103,7 @@ proto.service.Document.deserializeBinaryFromReader = function(msg, reader) {
       msg.setIdentifier(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
       msg.setContent(value);
       break;
     default:
@@ -142,9 +142,9 @@ proto.service.Document.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
-  f = message.getContent();
+  f = message.getContent_asU8();
   if (f.length > 0) {
-    writer.writeString(
+    writer.writeBytes(
       2,
       f
     );
@@ -168,7 +168,7 @@ proto.service.Document.prototype.setIdentifier = function(value) {
 
 
 /**
- * optional string content = 2;
+ * optional bytes content = 2;
  * @return {string}
  */
 proto.service.Document.prototype.getContent = function() {
@@ -176,9 +176,33 @@ proto.service.Document.prototype.getContent = function() {
 };
 
 
-/** @param {string} value */
+/**
+ * optional bytes content = 2;
+ * This is a type-conversion wrapper around `getContent()`
+ * @return {string}
+ */
+proto.service.Document.prototype.getContent_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getContent()));
+};
+
+
+/**
+ * optional bytes content = 2;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getContent()`
+ * @return {!Uint8Array}
+ */
+proto.service.Document.prototype.getContent_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getContent()));
+};
+
+
+/** @param {!(string|Uint8Array)} value */
 proto.service.Document.prototype.setContent = function(value) {
-  jspb.Message.setProto3StringField(this, 2, value);
+  jspb.Message.setProto3BytesField(this, 2, value);
 };
 
 

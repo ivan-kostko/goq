@@ -2,7 +2,18 @@ package main
 
 import (
 	"context"
+	"fmt"
+	"io"
+	"io/ioutil"
+	"net/http"
+	"reflect"
 	"sync"
+
+	"github.com/pkg/errors"
+
+	"github.com/grpc-ecosystem/grpc-gateway/runtime"
+
+	"google.golang.org/grpc"
 
 	log "github.com/sirupsen/logrus"
 
@@ -12,7 +23,9 @@ import (
 	"github.com/ivan-kostko/goq/storage/inmem"
 )
 
-func ComposeInmemRpcDocumentService(log log.Logger) {
+func ComposeInmemRpcDocumentService(log *log.Logger, rpcAddr string) (Server, Server, error) {
+
+	grpcServer := grpc.NewServer()
 
 	inmemStorage := new(sync.Map)
 
@@ -24,11 +37,6 @@ func ComposeInmemRpcDocumentService(log log.Logger) {
 	getterLog := log.WithField("name", "Storer")
 	inmemGetterLog := log.WithField("name", "InmemStorer")
 
-	grpcServer, err := grpcServer(false, "", "")
-	if err != nil {
-		log.Fatalf("Failed to set up gRPC server: %v", err)
-	}
-
 	pb.RegisterDocumentsServer(
 		grpcServer,
 		service.NewDocumentsServer(
@@ -38,8 +46,17 @@ func ComposeInmemRpcDocumentService(log log.Logger) {
 		),
 	)
 
-	pb.RegisterDocumentsHandlerFromEndpoint(context.Background(), mux)
+	mux := runtime.NewServeMux(
+		runtime.WithMarshalerOption(runtime.MIMEWildcard, &rawJSONPb{runtime.JSONPb{}}),
+		runtime.WithProtoErrorHandler(runtime.DefaultHTTPProtoErrorHandler),
+	)
 
+	if err := pb.RegisterDocumentsHandlerFromEndpoint(context.Background(), mux, rpcAddr, []grpc.DialOption{grpc.WithInsecure()}); err != nil {
+		err = errors.Wrap(err, "Failed to register REST service")
+		return nil, nil, err
+	}
+
+	return grpcServer, &http.Server{Handler: mux}, nil
 }
 
 type contextLogger struct {
@@ -48,4 +65,32 @@ type contextLogger struct {
 
 func (cl *contextLogger) SetContext(ctx context.Context) {
 	cl.Entry = cl.Entry.WithContext(ctx)
+}
+
+var typeOfBytes = reflect.TypeOf([]byte(nil))
+
+type rawJSONPb struct {
+	runtime.JSONPb
+}
+
+func (*rawJSONPb) NewDecoder(r io.Reader) runtime.Decoder {
+	return runtime.DecoderFunc(func(v interface{}) error {
+		rawData, err := ioutil.ReadAll(r)
+		if err != nil {
+			return err
+		}
+		rv := reflect.ValueOf(v)
+
+		if rv.Kind() != reflect.Ptr {
+			return fmt.Errorf("%T is not a pointer", v)
+		}
+
+		rv = rv.Elem()
+		if rv.Type() != typeOfBytes {
+			return fmt.Errorf("Type must be []byte but got %T", v)
+		}
+
+		rv.Set(reflect.ValueOf(rawData))
+		return nil
+	})
 }
