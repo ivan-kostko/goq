@@ -2,7 +2,14 @@ package main
 
 import (
 	"context"
+	"net/http"
 	"sync"
+
+	"github.com/pkg/errors"
+
+	"github.com/grpc-ecosystem/grpc-gateway/runtime"
+
+	"google.golang.org/grpc"
 
 	log "github.com/sirupsen/logrus"
 
@@ -12,7 +19,9 @@ import (
 	"github.com/ivan-kostko/goq/storage/inmem"
 )
 
-func ComposeInmemRpcDocumentService(log log.Logger) {
+func ComposeInmemRpcDocumentService(log *log.Logger, rpcAddr string) (Server, Server, error) {
+
+	grpcServer := grpc.NewServer()
 
 	inmemStorage := new(sync.Map)
 
@@ -24,11 +33,6 @@ func ComposeInmemRpcDocumentService(log log.Logger) {
 	getterLog := log.WithField("name", "Storer")
 	inmemGetterLog := log.WithField("name", "InmemStorer")
 
-	grpcServer, err := grpcServer(false, "", "")
-	if err != nil {
-		log.Fatalf("Failed to set up gRPC server: %v", err)
-	}
-
 	pb.RegisterDocumentsServer(
 		grpcServer,
 		service.NewDocumentsServer(
@@ -38,8 +42,14 @@ func ComposeInmemRpcDocumentService(log log.Logger) {
 		),
 	)
 
-	pb.RegisterDocumentsHandlerFromEndpoint(context.Background(), mux)
+	mux := runtime.NewServeMux()
 
+	if err := pb.RegisterDocumentsHandlerFromEndpoint(context.Background(), mux, rpcAddr, []grpc.DialOption{grpc.WithInsecure()}); err != nil {
+		err = errors.Wrap(err, "Failed to register REST service")
+		return nil, nil, err
+	}
+
+	return grpcServer, &http.Server{Handler: mux}, nil
 }
 
 type contextLogger struct {

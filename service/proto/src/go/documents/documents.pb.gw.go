@@ -43,6 +43,9 @@ func request_Documents_Store_0(ctx context.Context, marshaler runtime.Marshaler,
 	if berr != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
 	}
+
+	println("&protoReq.Document:", &protoReq.Document)
+
 	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq.Document.Content); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}

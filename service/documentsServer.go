@@ -3,7 +3,6 @@ package service
 import (
 	"bytes"
 
-	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/pkg/errors"
 
 	"context"
