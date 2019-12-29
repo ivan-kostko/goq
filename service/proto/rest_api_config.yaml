@@ -8,3 +8,4 @@
    - selector: service.Documents.Store
      put: /v1/document/{identifier}
      body: "content"
+
